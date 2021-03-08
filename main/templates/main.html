@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+
+		<section class="home">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-sm-12 col-xs-12">
+						<div class="owl-carousel owl-theme slide" id="featured">
+							<div class="item">
+								<article class="featured">
+									<div class="overlay"></div>
+									<figure>
+										<img src="{% static 'images/com.png' %}" alt="Sample Article">
+									</figure>
+									<div class="details">
+										<div class="category"><a href="{% url 'main:shops' %}">Магазины</a></div>
+										<h1><a href="">Система учета проданных товаров</a></h1>
+									</div>
+								</article>
+							</div>
+						</div>
+						<div class="line">
+							<div>Главные новости недели</div>
+						</div>
+
+						<div class="row">
+
+
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="row">
+
+                                    {% for item_news in data_set1 %}
+                                        <article class="article col-md-12">
+                                            <div class="inner">
+                                                <figure>
+                                                    <a href="">
+                                                        <img src="{{ item_news.image_link }}" alt="Sample Article">
+                                                    </a>
+                                                </figure>
+                                                <div class="padding">
+                                                    <div class="detail">
+                                                        <div class="category"><a href="{{ item_news.tag_link }}">{{ item_news.tag_name }}</a></div>
+                                                    </div>
+                                                    <h2><a href="">{{ item_news.title }}</a></h2>
+                                                    <footer>
+                                                        <a class="btn btn-primary more" href="{{ item_news.source_link }}">
+                                                            <div>TUT.by</div>
+                                                            <div><i class="ion-ios-arrow-thin-right"></i></div>
+                                                        </a>
+                                                    </footer>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    {% endfor %}
+								</div>
+							</div>
+
+
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="row">
+
+                                    {% for item_news in data_set2 %}
+                                        <article class="article col-md-12">
+                                            <div class="inner">
+                                                <figure>
+                                                    <a href="">
+                                                        <img src="{{ item_news.image_link }}" alt="Sample Article">
+                                                    </a>
+                                                </figure>
+                                                <div class="padding">
+                                                    <div class="detail">
+                                                        <div class="category"><a href="{{ item_news.tag_link }}">{{ item_news.tag_name }}</a></div>
+                                                    </div>
+                                                    <h2><a href="">{{ item_news.title }}</a></h2>
+                                                    <footer>
+                                                        <a class="btn btn-primary more" href="{{ item_news.source_link }}">
+                                                            <div>TUT.by</div>
+                                                            <div><i class="ion-ios-arrow-thin-right"></i></div>
+                                                        </a>
+                                                    </footer>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    {% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-6 col-md-4 sidebar" id="sidebar">
+						<div class="sidebar-title for-tablet">Sidebar</div>
+						<aside>
+							<div class="aside-body">
+								<div class="featured-author">
+									<div class="featured-author-inner">
+										<div class="featured-author-cover" style="background-image: url({% static 'images/news/city5.jpg' %});">
+											<div class="badges">
+												<div class="badge-item"><i class="ion-star"></i> <a href="{% url 'main:about' %}" style="color: #f5f5f5;">О нас</a></div>
+											</div>
+										</div>
+										<div class="featured-author-body">
+											<div class="featured-author-quote">
+												Учет товаров нужен, чтобы управлять ассортиментом и рентабельностью
+												магазина. Для работы с ассортиментом нужно знать, сколько товара
+												закуплено у поставщика, сколько продано, а сколько потеряно из-за
+												порчи или кражи. Для оценки прибыльности нужны отчеты, которые строятся
+												на основе товароучета и данных с кассы.
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+				</div>
+			</div>
+		</section>
+{% endblock %}

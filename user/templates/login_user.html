@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<section class="login first grey" style="padding-top: 218px;">
+			<div class="container">
+				<div class="box-wrapper">
+					<div class="box box-border">
+						<div class="box-body">
+							<h4>Login</h4>
+							<form role="form" method="post" action="">
+								{% csrf_token %}
+								{% if messages %}
+									{% for message in messages %}
+										<div class="alert alert-warning" role="alert">
+											{{ message }}
+										</div>
+									{% endfor %}
+								{% endif %}
+								<div class="form-group">
+									<label for="login-username"><i class="icon-user"></i> <b>Email пользователя</b></label>
+									{{ form.email.errors }}
+									{{ form.email }}
+								</div>
+								<div class="form-group">
+									<label for="login-password"><i class="icon-lock"></i> <b>Пароль</b></label>
+									{{ form.password1.errors }}
+									{{ form.password }}
+								</div>
+
+								<div class="form-group text-right">
+									<button class="btn btn-primary btn-block">Войти</button>
+								</div>
+								<div class="form-group text-center">
+									<span class="text-muted">Нет аккаунта?</span> <a href="{% url 'user:register' %}">Создать</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+		<section class="login first grey">
+			<div class="container">
+				<div class="box-wrapper">
+					<div class="box box-border">
+						<div class="box-body">
+							<h4>Для регистрации заполните форму</h4>
+							<form role="form" method="post" action="">
+								{% csrf_token %}
+								{% if messages %}
+									{% for message in messages %}
+										<div class="alert alert-success" role="alert">
+											{{ message }}
+										</div>
+									{% endfor %}
+								{% endif %}
+								{% for field in form %}
+									<div class="form-group">
+										{% if field.errors %}
+											{% for error in field.errors %}
+												<div class="alert alert-danger">
+													{{ error }}
+												</div>
+											{% endfor %}
+										{% endif %}
+										{{field.label_tag}}
+										{{field}}
+									</div>
+								{% endfor %}
+
+								<div class="form-group text-right">
+									<button class="btn btn-primary btn-block">Зарегистрироваться</button>
+								</div>
+								<div class="form-group text-center">
+									<span class="text-muted">У Вас уже есть аккаунт?</span> <a href="{% url 'user:login_user' %}">Войти</a>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+{% endblock %}

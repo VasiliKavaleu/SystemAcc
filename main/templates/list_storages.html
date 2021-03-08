@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Склады{% endblock %}
+
+{% block content %}
+<section class="category first" style="padding-top: 218px;">
+		  <div class="container" >
+		    <div class="row">
+		      <div class="col-md-8 text-left">
+		        <div class="row">
+		          <div class="col-md-12">
+		            <h1 class="page-title">Список складов</h1>
+		          </div>
+		        </div>
+		        <div class="line"></div>
+		        <div class="row" id="content">
+                  {% if storages.item_obj %}
+                  {% for storage in storages.item_obj %}
+		          <article class="col-md-12 article-list">
+		            <div class="inner">
+		              <figure>
+			              <a href="single.html">
+			                <img src="{% static 'images/storage.jpg' %}">
+		                </a>
+		              </figure>
+		              <div class="details">
+		                <h1><a href="">{{ storage.name }}</a></h1>
+		                <footer>
+		                  <a class="btn btn-primary more" href="{% url 'main:product_list_by_storage' storage.id %}">
+		                    <div>Товары склада</div>
+		                    <div><i class="ion-ios-arrow-thin-right"></i></div>
+		                  </a>
+		                </footer>
+		              </div>
+		            </div>
+                      <div class="line"></div>
+		          </article>
+                  {% endfor %}
+                  {% endif %}
+				  {% if storages.is_qs_paginated %}
+					 <div class="col text-center">
+						<nav aria-label="Page navigation example">
+							<div class="justify-content-center">
+							  <ul class="pagination justify-content-center pagination-lg" id="pagination">
+
+									<li class="page-item {% if not storages.prev_page %} disabled {% endif %} ">
+									  <a class="page-link" href="{{ storages.prev_page }}" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+										<span class="sr-only">Previous</span>
+									  </a>
+									</li>
+								{% for n in storages.item_obj.paginator.page_range %}
+									{% if item_obj.number == n %}
+										<li class="page-item active"><a class="page-link active" href="?page={{ n }}">{{ n }}</a></li>
+									{% elif n > storages.item_obj.number|add:-3 and n < storages.item_obj.number|add:3 %}
+										<li class="page-item"><a class="page-link active" href="?page={{ n }}">{{ n }}</a></li>
+									{% endif %}
+								{% endfor %}
+									<li class="page-item {% if not storages.next_page %} disabled {% endif %}">
+									  <a class="page-link" href="{{ storages.next_page }}" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">Next</span>
+									  </a>
+									</li>
+							  </ul>
+							</div>
+						</nav>
+					 </div>
+				  {% endif %}
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+</section>
+{% endblock %}
+
+
